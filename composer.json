@@ -1,0 +1,14 @@
+{
+  "name": "dhardy97-328/dating",
+  "description": "First Composer Project",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Dylan Hardy",
+      "email": "dhardy8@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
