@@ -1,0 +1,19 @@
+header{
+    background-color: lightgray;
+}
+
+.main-body{
+    /* Layout Styles */
+    display: flex;
+    flex-direction: row;
+
+    /* Border Styles */
+    border: 1px solid darkgray;
+    border-radius: 5px;
+
+    text-align: center;
+}
+
+.right-image{
+    width: 100%;
+}
