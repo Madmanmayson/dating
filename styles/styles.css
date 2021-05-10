@@ -2,11 +2,13 @@ header{
     background-color: lightgray;
 }
 
-.main-body{
+.body-flex{
     /* Layout Styles */
     display: flex;
     flex-direction: row;
+}
 
+.main-body{
     /* Border Styles */
     border: 1px solid darkgray;
     border-radius: 5px;
@@ -14,4 +16,25 @@ header{
 
 .right-image{
     width: 100%;
+}
+
+.w-70{
+    width: 70%;
+}
+
+.w-30{
+    width: 30%;
+}
+
+.form-container{
+    margin-bottom: 1rem;
+}
+
+.form-container > label{
+    font-weight: 600;
+    margin: 0;
+}
+
+.bold{
+    font-weight: 600;
 }
