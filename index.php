@@ -50,4 +50,23 @@ $core->route('GET|POST /signup2', function(){
     echo $view->render('views/profile.html');
 });
 
+$core->route('GET|POST /signup3', function(){
+
+    //If the form has been submitted, add the data to session
+    //and send the user to the next order form
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $_SESSION['indoor'] = $_POST['indoor'];
+        $_SESSION['outdoor'] = $_POST['outdoor'];
+        header('location: summary');
+    }
+
+    $view = new Template();
+    echo $view->render('views/interests.html');
+});
+
+$core->route('GET|POST /summary', function(){
+
+    var_dump($_SESSION);
+});
+
 $core->run();
