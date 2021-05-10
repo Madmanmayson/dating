@@ -30,11 +30,24 @@ $core->route('GET|POST /signup1', function(){
         header('location: signup2');
     }
 
-
     $view = new Template();
     echo $view->render('views/personalInfo.html');
 });
 
+$core->route('GET|POST /signup2', function(){
 
+    //If the form has been submitted, add the data to session
+    //and send the user to the next order form
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['state'] = $_POST['state'];
+        $_SESSION['seeking'] = $_POST['seeking'];
+        $_SESSION['bio'] = $_POST['bio'];
+        header('location: signup3');
+    }
+
+    $view = new Template();
+    echo $view->render('views/profile.html');
+});
 
 $core->run();
