@@ -30,12 +30,21 @@ class Validation
     }
 
     /**
-     * @param string $phone the  number to validate
+     * @param string $phone the number to validate
      * @return bool returns true if valid, otherwise false
      */
     public static function validPhone(string $phone): bool
     {
         return preg_match("/^\(?[0-9]{3}\)?[ .-]?[0-9]{3}[ .-]?[0-9]{4}$/", $phone);
+    }
+
+    /**
+     * @param string $email the email to validate
+     * @return bool returns true if valid, otherwise false
+     */
+    public static function validEmail(string $email): bool
+    {
+        return preg_match("/^[\w!#$%&'*+\/=?^`{|}~.-]+@[\w]+\.[\w]+$/", $email);
     }
 
     /**
