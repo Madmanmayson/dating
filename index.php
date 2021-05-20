@@ -17,17 +17,51 @@ $core->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
-$core->route('GET|POST /signup1', function(){
+$core->route('GET|POST /signup1', function($f3){
+
+    if(!isset($_SESSION)){
+        $_SESSION = array();
+        $_SESSION['profile'] = new Profile();
+    }
 
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $_SESSION['fname'] = $_POST['fname'];
-        $_SESSION['lname'] = $_POST['lname'];
-        $_SESSION['age'] = $_POST['age'];
-        $_SESSION['gender'] = $_POST['gender'];
-        $_SESSION['phone'] = $_POST['phone'];
-        header('location: signup2');
+
+        if(Validation::validPartialName($_POST['fname'])){
+            $_SESSION['profile']->setFname($_POST['fname']);
+        }
+        else {
+            $this->_f3->set('errors["fname"]', 'Please enter a valid first name.');
+        }
+
+        if(Validation::validPartialName($_POST['lname'])){
+            $_SESSION['profile']->setLname($_POST['lname']);
+        }
+        else {
+            $this->_f3->set('errors["lname"]', 'Please enter a valid last name.');
+        }
+
+        if(Validation::validAge($_POST['age'])){
+            $_SESSION['profile']->setAge($_POST['age']);
+        }
+        else {
+            $this->_f3->set('errors["age"]', 'Please enter a valid age.');
+        }
+
+        if(Validation::validPhone($_POST['phone'])){
+            $_SESSION['profile']->setPhone($_POST['phone']);
+        }
+        else {
+            $this->_f3->set('errors["phone"]', 'Please enter a phone number.');
+        }
+
+        // TODO: Validate optional fields
+        $_SESSION['profile']->setGender($_POST['gender']);
+
+        if(empty($f3->get('errors'))){
+            header('location: signup2');
+        }
     }
 
     $view = new Template();
