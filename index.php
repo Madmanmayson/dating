@@ -44,7 +44,8 @@ $core->route('GET|POST /signup1', function($f3){
             $f3->set('errors["lname"]', 'Please enter a valid last name.');
         }
 
-        if(Validation::validAge($_POST['age'])){
+
+        if(!empty($_POST['age']) && Validation::validAge($_POST['age'])){
             $_SESSION['profile']->setAge($_POST['age']);
         }
         else {
@@ -67,6 +68,8 @@ $core->route('GET|POST /signup1', function($f3){
             header('location: signup2');
         }
     }
+
+    $f3->set('genders', DataLayer::getGenders());
 
     $view = new Template();
     echo $view->render('views/personalInfo.html');

@@ -3,7 +3,7 @@
 class DataLayer
 {
     /**
-     * @return string[] a array of all possible indoor interests
+     * @return string[] an array of all possible indoor interests
      */
     public static function getIndoorInterests(): array
     {
@@ -20,7 +20,7 @@ class DataLayer
     }
 
     /**
-     * @return string[] a array of all possible outdoor interests
+     * @return string[] an array of all possible outdoor interests
      */
     public static function getOutdoorInterests(): array
     {
@@ -34,6 +34,9 @@ class DataLayer
         );
     }
 
+    /**
+     * @return string[] an array of all possible genders
+     */
     public static function getGenders(): array
     {
         return array(
