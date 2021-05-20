@@ -15,7 +15,8 @@ class DataLayer
             "puzzles",
             "reading",
             "cards",
-            "video-games");
+            "video-games"
+        );
     }
 
     /**
@@ -29,6 +30,16 @@ class DataLayer
             "swimming",
             "collecting",
             "walking",
-            "climbing");
+            "climbing"
+        );
+    }
+
+    public static function getGenders(): array
+    {
+        return array(
+            "male",
+            "female",
+            "other"
+        );
     }
 }
