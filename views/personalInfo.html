@@ -13,17 +13,21 @@
         <div class="form-group w-70 me-5">
             <div class="form-container">
                 <label class="form-label" for="fname">First Name</label>
-                <input id="fname" name="fname" class="form-control">
+                <input id="fname" name="fname" class="form-control" value="{{ @SESSION['profile']->getFname() }}">
             </div>
 
             <div class="form-container">
                 <label class="form-label" for="lname">Last Name</label>
-                <input id="lname" name="lname" class="form-control">
+                <input id="lname" name="lname" class="form-control" value="{{ @SESSION['profile']->getLname() }}">
             </div>
 
             <div class="form-container">
                 <label class="form-label" for="age">Age</label>
-                <input id="age" name="age" class="form-control">
+                <input id="age" name="age" class="form-control"
+                       <check if="{{ @SESSION['profile']->getAge() != -1 }}">
+                       value="{{ @SESSION['profile']->getAge() }}"
+                       </check>
+                >
             </div>
 
             <div class="form-container">
@@ -42,7 +46,7 @@
 
             <div class="form-container">
                 <label class="form-label" for="phone">Phone Number</label>
-                <input id="phone" name="phone" class="form-control">
+                <input id="phone" name="phone" class="form-control" value="{{ @SESSION['profile']->getPhone() }}">
             </div>
         </div>
 
