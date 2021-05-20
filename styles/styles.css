@@ -38,3 +38,7 @@ header{
 .bold{
     font-weight: 600;
 }
+
+.error-text{
+    color: red;
+}

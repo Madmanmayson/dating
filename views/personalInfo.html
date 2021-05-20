@@ -14,11 +14,18 @@
             <div class="form-container">
                 <label class="form-label" for="fname">First Name</label>
                 <input id="fname" name="fname" class="form-control" value="{{ @SESSION['profile']->getFname() }}">
+                <check if="{{ isset(@errors['fname']) }}">
+                    <span class="error-text">{{ @errors['fname'] }}</span>
+                </check>
             </div>
+
 
             <div class="form-container">
                 <label class="form-label" for="lname">Last Name</label>
                 <input id="lname" name="lname" class="form-control" value="{{ @SESSION['profile']->getLname() }}">
+                <check if="{{ isset(@errors['lname']) }}">
+                    <span class="error-text">{{ @errors['lname'] }}</span>
+                </check>
             </div>
 
             <div class="form-container">
@@ -28,6 +35,9 @@
                        value="{{ @SESSION['profile']->getAge() }}"
                        </check>
                 >
+                <check if="{{ isset(@errors['age']) }}">
+                    <span class="error-text">{{ @errors['age'] }}</span>
+                </check>
             </div>
 
             <div class="form-container">
@@ -53,6 +63,9 @@
             <div class="form-container">
                 <label class="form-label" for="phone">Phone Number</label>
                 <input id="phone" name="phone" class="form-control" value="{{ @SESSION['profile']->getPhone() }}">
+                <check if="{{ isset(@errors['phone']) }}">
+                    <span class="error-text">{{ @errors['phone'] }}</span>
+                </check>
             </div>
         </div>
 

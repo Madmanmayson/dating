@@ -24,8 +24,6 @@ $core->route('GET|POST /signup1', function($f3){
         $_SESSION['profile'] = new Profile();
     }
 
-    var_dump($_SESSION);
-
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
