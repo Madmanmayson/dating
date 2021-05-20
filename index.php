@@ -73,7 +73,9 @@ $core->route('GET|POST /signup1', function($f3){
     echo $view->render('views/personalInfo.html');
 });
 
-$core->route('GET|POST /signup2', function(){
+$core->route('GET|POST /signup2', function($f3){
+
+    var_dump($_SESSION);
 
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
@@ -84,6 +86,8 @@ $core->route('GET|POST /signup2', function(){
         $_SESSION['bio'] = $_POST['bio'];
         header('location: signup3');
     }
+
+    $f3->set('states', DataLayer::getStates());
 
     $view = new Template();
     echo $view->render('views/profile.html');
