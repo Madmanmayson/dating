@@ -6,7 +6,16 @@ class Validation
      * @param string $name the name to validate
      * @return bool returns true if valid, otherwise false
      */
-    public static function validName(string $name): bool
+    public static function validPartialName(string $name): bool
+    {
+        return preg_match("/^[a-zA-Z]+$/", $name);
+    }
+
+    /**
+     * @param string $name the name to validate
+     * @return bool returns true if valid, otherwise false
+     */
+    public static function validFullName(string $name): bool
     {
         return preg_match("/^[a-zA-Z]+ [a-zA-Z]+$/", $name);
     }

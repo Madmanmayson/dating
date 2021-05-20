@@ -3,7 +3,8 @@
 class Profile
 {
     //Fields for Personal Information
-    private $name;
+    private $fname;
+    private $lname;
     private $age;
     private $gender;
     private $state;
@@ -21,7 +22,8 @@ class Profile
 
     public function __construct()
     {
-        $this->name = "";
+        $this->fname = "";
+        $this->lname = "";
         $this->age = -1;
         $this->gender = "";
         $this->state = "";
@@ -40,17 +42,33 @@ class Profile
     /**
      * @return string
      */
-    public function getName(): string
+    public function getFname(): string
     {
-        return $this->name;
+        return $this->fname;
     }
 
     /**
-     * @param string $name
+     * @param string $fname
      */
-    public function setName(string $name): void
+    public function setFname(string $fname): void
     {
-        $this->name = $name;
+        $this->fname = $fname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLname(): string
+    {
+        return $this->lname;
+    }
+
+    /**
+     * @param string $lname
+     */
+    public function setLname(string $lname): void
+    {
+        $this->lname = $lname;
     }
 
     /**
