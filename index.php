@@ -112,15 +112,44 @@ $core->route('GET|POST /signup2', function($f3){
     echo $view->render('views/profile.html');
 });
 
-$core->route('GET|POST /signup3', function(){
+$core->route('GET|POST /signup3', function($f3){
 
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $_SESSION['indoor'] = implode(", ", $_POST['indoor']);
-        $_SESSION['outdoor'] = implode(", ", $_POST['outdoor']);
-        header('location: summary');
+
+        if(!empty($_POST['indoor'])){
+            if(Validation::validIndoor($_POST['indoor'])) {
+                $_SESSION['profile']->setIndoorInterests($_POST['indoor']);
+            }
+            else {
+                $f3->set('errors["indoor"]', 'Please give only valid indoor interests.');
+            }
+        }
+        else {
+            $_SESSION['profile']->setIndoorInterests(array());
+        }
+
+        if(!empty($_POST['outdoor'])){
+            if(Validation::validOutdoor($_POST['outdoor'])) {
+                $_SESSION['profile']->setOutdoorInterests($_POST['outdoor']);
+            }
+            else {
+                $f3->set('errors["indoor"]', 'Please give only valid outdoor interests.');
+            }
+        }
+        else {
+            $_SESSION['profile']->setOutdoorInterests(array());
+        }
+
+
+        if(empty($f3->get('errors'))){
+            header('location: summary');
+        }
     }
+
+    $f3->set('indoorActivities', DataLayer::getIndoorInterests());
+    $f3->set('outdoorActivities', DataLayer::getOutdoorInterests());
 
     $view = new Template();
     echo $view->render('views/interests.html');

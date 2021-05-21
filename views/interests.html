@@ -12,68 +12,46 @@
         <div class="form-container w-100">
             <span class="bold mb-2">In-door Interests</span>
             <div class="row row-cols-4 m-0 mt-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="tv" value="tv">
-                    <label class="form-check-label" for="tv">TV</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="movies" value="movies">
-                    <label class="form-check-label" for="movies">Movies</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="cooking" value="cooking">
-                    <label class="form-check-label" for="cooking">Cooking</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="board-games" value="board-games">
-                    <label class="form-check-label" for="board-games">Board Games</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="puzzles" value="puzzles">
-                    <label class="form-check-label" for="puzzles">Puzzles</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="reading" value="reading">
-                    <label class="form-check-label" for="reading">Reading</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="cards" value="cards">
-                    <label class="form-check-label" for="cards">Playing Cards</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="indoor[]" id="video-games" value="video-games">
-                    <label class="form-check-label" for="video-games">Video Games</label>
-                </div>
+                <repeat group="{{ @indoorActivities }}" value="{{ @activity }}">
+                    <div class="form-check">
+                        <input type="checkbox"
+                               class="form-check-input"
+                               name="indoor[]"
+                               id="{{ @activity }}"
+                               value="{{ @activity }}"
+                               <check if="{{ in_array(@activity, @SESSION['profile']->getIndoorInterests()) }}">
+                                   checked
+                               </check>
+                        >
+                        <label class="form-check-label" for="{{ @activity }}">{{ ucwords(str_replace("-", " ", @activity)) }}</label>
+                    </div>
+                </repeat>
             </div>
+            <check if="{{ isset(@errors['indoor']) }}">
+                <span class="error-text">{{ @errors['indoor'] }}</span>
+            </check>
         </div>
         <div class="form-container w-100">
             <span class="bold mb-2">Out-door Interests</span>
             <div class="row row-cols-4 m-0 mt-2">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="hiking" value="hiking">
-                    <label class="form-check-label" for="hiking">Hiking</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="biking" value="biking">
-                    <label class="form-check-label" for="biking">Biking</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="swimming" value="swimming">
-                    <label class="form-check-label" for="swimming">Swimming</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="collecting" value="collecting">
-                    <label class="form-check-label" for="collecting">Collecting</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="walking" value="walking">
-                    <label class="form-check-label" for="walking">Walking</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="outdoor[]" id="climbing" value="climbing">
-                    <label class="form-check-label" for="climbing">Climbing</label>
-                </div>
+                <repeat group="{{ @outdoorActivities }}" value="{{ @outactivity }}">
+                    <div class="form-check">
+                        <input type="checkbox"
+                               class="form-check-input"
+                               name="outdoor[]"
+                               id="{{ @outactivity }}"
+                               value="{{ @outactivity }}"
+                        <check if="{{ in_array(@outactivity, @SESSION['profile']->getOutdoorInterests()) }}">
+                            checked
+                        </check>
+                        >
+                        <label class="form-check-label" for="{{ @outactivity }}">{{ ucwords(str_replace("-", " ", @outactivity)) }}</label>
+                    </div>
+                </repeat>
             </div>
+            <check if="{{ isset(@errors['outdoor']) }}">
+                <span class="error-text">{{ @errors['outdoor'] }}</span>
+            </check>
         </div>
         <div class="d-flex justify-content-end w-100">
             <button class="btn btn-primary" type="submit">Next >></button>
