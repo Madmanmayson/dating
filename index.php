@@ -75,18 +75,37 @@ $core->route('GET|POST /signup1', function($f3){
 
 $core->route('GET|POST /signup2', function($f3){
 
-    var_dump($_SESSION);
-
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['state'] = $_POST['state'];
-        $_SESSION['seeking'] = $_POST['seeking'];
-        $_SESSION['bio'] = $_POST['bio'];
-        header('location: signup3');
+
+        if(!empty($_POST['email']) && Validation::validEmail($_POST['email'])){
+            $_SESSION['profile']->setEmail($_POST['email']);
+        }
+        else {
+            $f3->set('errors["email"]', 'Please enter a valid email.');
+        }
+
+        if(!empty($_POST['state'])){
+            $_SESSION['profile']->setState($_POST['state']);
+        }
+
+        if(!empty($_POST['seeking'])){
+            $_SESSION['profile']->setSeekingGender($_POST['seeking']);
+        }
+
+        if(!empty($_POST['bio'])){
+            $_SESSION['profile']->setBio($_POST['bio']);
+        }
+
+
+        if(empty($f3->get('errors'))){
+            header('location: signup3');
+        }
+
     }
 
+    $f3->set('genders', DataLayer::getGenders());
     $f3->set('states', DataLayer::getStates());
 
     $view = new Template();
