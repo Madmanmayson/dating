@@ -10,35 +10,35 @@
         <div class="w-50 me-5">
             <table class="table table-bordered rounded">
                 <tr>
-                    <td>Name: {{ @SESSION.fname }} {{ @SESSION.lname }}</td>
+                    <td>Name: {{ @SESSION['profile']->getFname() }} {{ @SESSION['profile']->getLname() }}</td>
                 </tr>
                 <tr>
-                    <td>Gender: {{ @SESSION.gender }}</td>
+                    <td>Gender: {{ @SESSION['profile']->getGender() }}</td>
                 </tr>
                 <tr>
-                    <td>Age: {{ @SESSION.age }}</td>
+                    <td>Age: {{ @SESSION['profile']->getAge() }}</td>
                 </tr>
                 <tr>
-                    <td>Phone: {{ @SESSION.phone }}</td>
+                    <td>Phone: {{ @SESSION['profile']->getPhone() }}</td>
                 </tr>
                 <tr>
-                    <td>email: {{ @SESSION.email }}</td>
+                    <td>email: {{ @SESSION['profile']->getEmail() }}</td>
                 </tr>
                 <tr>
-                    <td>state: {{ @SESSION.state }}</td>
+                    <td>state: {{ @SESSION['profile']->getState() }}</td>
                 </tr>
                 <tr>
-                    <td>seeking: {{ @SESSION.seeking }}</td>
+                    <td>seeking: {{ @SESSION['profile']->getSeekingGender() }}</td>
                 </tr>
                 <tr>
-                    <td>Interests: {{ @SESSION.indoor }}, {{ @SESSION.outdoor }}</td>
+                    <td>Interests: {{ implode(", ", @SESSION['profile']->getIndoorInterests()) }}, {{ implode(", ", @SESSION['profile']->getOutdoorInterests()) }}</td>
                 </tr>
             </table>
         </div>
 
         <div class="w-50">
             <h2>Biography</h2>
-            <p>{{ @SESSION.bio }}</p>
+            <p>{{ @SESSION['profile']->getBio() }}</p>
         </div>
     </div>
 
