@@ -19,9 +19,17 @@ $core->route('GET /', function(){
 
 $core->route('GET|POST /signup1', function($f3){
 
+    var_dump($_POST);
+
     if(empty($_SESSION)){
         $_SESSION = array();
-        $_SESSION['profile'] = new Profile();
+
+        if(isset($_POST['premium'])){
+            $_SESSION['profile'] = new Premium();
+        }
+        else {
+            $_SESSION['profile'] = new Member();
+        }
     }
 
     //If the form has been submitted, add the data to session
@@ -106,9 +114,14 @@ $core->route('GET|POST /signup2', function($f3){
 
 
         if(empty($f3->get('errors'))){
-            header('location: signup3');
-        }
+            if($_SESSION['profile'] instanceof Premium){
+                header('location: signup3');
+            }
+            else {
+                header('location: summary');
 
+            }
+        }
     }
 
     $f3->set('genders', DataLayer::getGenders());
