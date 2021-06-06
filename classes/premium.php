@@ -1,7 +1,7 @@
 <?php
 
 
-class Premium extends Member
+class PremiumMember extends Member
 {
     private $_outdoorInterests;
     private $_indoorInterests;
