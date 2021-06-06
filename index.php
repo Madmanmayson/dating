@@ -19,49 +19,50 @@ $core->route('GET /', function(){
 
 $core->route('GET|POST /signup1', function($f3){
 
-    var_dump($_POST);
 
     if(empty($_SESSION)){
         $_SESSION = array();
 
         if(isset($_POST['premium'])){
-            $_SESSION['profile'] = new Premium();
+            $_SESSION['profile'] = new PremiumMember();
         }
         else {
             $_SESSION['profile'] = new Member();
         }
     }
 
+
+    var_dump($_POST);
+    echo "<br><br>" . get_class($_SESSION['profile']) . "<br><br>";
+    var_dump($_SESSION);
+
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        if(Validation::validPartialName($_POST['fname'])){
-            $_SESSION['profile']->setFname($_POST['fname']);
-        }
-        else {
+        // fname
+        $_SESSION['profile']->setFname($_POST['fname']);
+        if(!Validation::validPartialName($_POST['fname'])){
             $f3->set('errors["fname"]', 'Please enter a valid first name.');
         }
 
-        if(Validation::validPartialName($_POST['lname'])){
-            $_SESSION['profile']->setLname($_POST['lname']);
-        }
-        else {
+        // lname
+        $_SESSION['profile']->setLname($_POST['lname']);
+        if(!Validation::validPartialName($_POST['lname'])){
             $f3->set('errors["lname"]', 'Please enter a valid last name.');
         }
 
-
-        if(!empty($_POST['age']) && Validation::validAge($_POST['age'])){
+        // age
+        if(!empty($_POST['age'])){
             $_SESSION['profile']->setAge($_POST['age']);
-        }
-        else {
-            $f3->set('errors["age"]', 'Please enter a valid age.');
+            if(!Validation::validAge($_POST['age'])){
+                $f3->set('errors["age"]', 'Please enter a valid age.');
+            }
         }
 
-        if(Validation::validPhone($_POST['phone'])){
-            $_SESSION['profile']->setPhone($_POST['phone']);
-        }
-        else {
+        // phone
+        $_SESSION['profile']->setPhone($_POST['phone']);
+        if(!Validation::validPhone($_POST['phone'])) {
             $f3->set('errors["phone"]', 'Please enter a phone number.');
         }
 

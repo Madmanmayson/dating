@@ -71,7 +71,11 @@
             <div class="form-container">
                 <label class="form-label" for="premium">Premium Membership</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="premium" id="premium" value="true">
+                    <input class="form-check-input" type="checkbox" name="premium" id="premium" value="true"
+                    <check if="{{ (@SESSION.profile instanceof PremiumMember) }}">
+                        checked
+                    </check>
+                    >
                     <label class="form-check-label" for="premium">Sign me up for a premium membership</label>
                 </div>
             </div>
