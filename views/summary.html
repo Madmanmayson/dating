@@ -10,34 +10,36 @@
         <div class="w-50 me-5">
             <table class="table table-bordered rounded">
                 <tr>
-                    <td>Name: {{ @SESSION['profile']->getFname() }} {{ @SESSION['profile']->getLname() }}</td>
+                    <td><b>Name:</b> {{ @SESSION['profile']->getFname() }} {{ @SESSION['profile']->getLname() }}</td>
                 </tr>
                 <tr>
-                    <td>Gender: {{ @SESSION['profile']->getGender() }}</td>
+                    <td><b>Gender:</b> {{ @SESSION['profile']->getGender() }}</td>
                 </tr>
                 <tr>
-                    <td>Age: {{ @SESSION['profile']->getAge() }}</td>
+                    <td><b>Age:</b> {{ @SESSION['profile']->getAge() }}</td>
                 </tr>
                 <tr>
-                    <td>Phone: {{ @SESSION['profile']->getPhone() }}</td>
+                    <td><b>Phone:</b> {{ @SESSION['profile']->getPhone() }}</td>
                 </tr>
                 <tr>
-                    <td>email: {{ @SESSION['profile']->getEmail() }}</td>
+                    <td><b>Email:</b> {{ @SESSION['profile']->getEmail() }}</td>
                 </tr>
                 <tr>
-                    <td>state: {{ @SESSION['profile']->getState() }}</td>
+                    <td><b>State:</b> {{ @SESSION['profile']->getState() }}</td>
                 </tr>
                 <tr>
-                    <td>seeking: {{ @SESSION['profile']->getSeekingGender() }}</td>
+                    <td><b>Seeking Gender:</b> {{ @SESSION['profile']->getSeekingGender() }}</td>
                 </tr>
-                <tr>
-                    <td>Interests: {{ implode(", ", @SESSION['profile']->getIndoorInterests()) }}, {{ implode(", ", @SESSION['profile']->getOutdoorInterests()) }}</td>
-                </tr>
+                <check if="{{ (@SESSION.profile instanceof PremiumMember) }}">
+                    <tr>
+                        <td><b>Interests:</b> {{ implode(", ", @SESSION['profile']->getIndoorInterests()) }}, {{ implode(", ", @SESSION['profile']->getOutdoorInterests()) }}</td>
+                    </tr>
+                </check>
             </table>
         </div>
 
         <div class="w-50">
-            <h2>Biography</h2>
+            <h2><b>Biography</b></h2>
             <p>{{ @SESSION['profile']->getBio() }}</p>
         </div>
     </div>

@@ -22,6 +22,13 @@ $core->route('GET|POST /signup1', function($f3){
 
     if(empty($_SESSION)){
         $_SESSION = array();
+        $_SESSION['profile'] = new Member(); //Needed for GET due to validation code
+    }
+
+
+    //If the form has been submitted, add the data to session
+    //and send the user to the next order form
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if(isset($_POST['premium'])){
             $_SESSION['profile'] = new PremiumMember();
@@ -29,16 +36,6 @@ $core->route('GET|POST /signup1', function($f3){
         else {
             $_SESSION['profile'] = new Member();
         }
-    }
-
-
-    var_dump($_POST);
-    echo "<br><br>" . get_class($_SESSION['profile']) . "<br><br>";
-    var_dump($_SESSION);
-
-    //If the form has been submitted, add the data to session
-    //and send the user to the next order form
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // fname
         $_SESSION['profile']->setFname($_POST['fname']);
@@ -84,6 +81,8 @@ $core->route('GET|POST /signup1', function($f3){
 
 $core->route('GET|POST /signup2', function($f3){
 
+    echo get_class($_SESSION['profile']);
+
     //If the form has been submitted, add the data to session
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -114,7 +113,7 @@ $core->route('GET|POST /signup2', function($f3){
 
 
         if(empty($f3->get('errors'))){
-            if($_SESSION['profile'] instanceof Premium){
+            if($_SESSION['profile'] instanceof PremiumMember){
                 header('location: signup3');
             }
             else {
