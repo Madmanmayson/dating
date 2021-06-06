@@ -88,11 +88,10 @@ $core->route('GET|POST /signup2', function($f3){
     //and send the user to the next order form
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        // email
+        $_SESSION['profile']->setEmail($_POST['email']);
         if(!empty($_POST['email'])){
-            if(Validation::validEmail($_POST['email'])){
-                $_SESSION['profile']->setEmail($_POST['email']);
-            }
-            else {
+            if(!Validation::validEmail($_POST['email'])){
                 $f3->set('errors["email"]', 'Please enter a valid email.');
             }
         }
